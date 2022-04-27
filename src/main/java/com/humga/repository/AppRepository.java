@@ -1,6 +1,9 @@
 package com.humga.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +18,11 @@ public class AppRepository {
     private final String QUERY_RESOURCE_FILE = "select.sql";
     private String query;
 
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    AppRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+
     @PostConstruct
     public void readQueryFromResourceFile() throws IOException {
         File resource = new ClassPathResource(QUERY_RESOURCE_FILE).getFile();
@@ -22,7 +30,8 @@ public class AppRepository {
     }
 
     public List<String> getProduct(String name) {
-        List<String> list = List.of("Product one", "Product two");
-        return list;
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("name", name);
+        return namedParameterJdbcTemplate.queryForList(query,parameters,String.class);
     }
 }
