@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,4 +30,17 @@ public class Customer {
 
     @Column (name = "phone_number")
     private long phoneNumber;
+
+    //поле для двусторонней связи с заказами
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
+
+    public void addOrder(Order order) {
+        orders.add(order);
+        order.setCustomer(this);
+    }
+    public void removeComment(Order order) {
+        orders.remove(order);
+        order.setCustomer(null);
+    }
 }

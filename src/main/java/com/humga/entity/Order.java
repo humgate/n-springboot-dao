@@ -21,9 +21,9 @@ public class Order {
     @Column(name ="date")
     private LocalDate date;
 
-    @Column(name="customer_id", nullable = false, unique = true)
-    @ManyToOne(targetEntity = Customer.class)
-    private Long customerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="customer_id", nullable = false)
+    private Customer customer;
 
     @Column(name = "product_name", nullable = false)
     private String productName;
