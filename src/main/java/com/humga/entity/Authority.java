@@ -1,12 +1,13 @@
 package com.humga.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity @Table(name = "authorities")
 public class Authority {
     @Id
@@ -20,4 +21,9 @@ public class Authority {
 
     @Column(name ="authority")
     private String authority;
+
+    public Authority(User user, String authority) {
+        this.user = user;
+        this.authority = authority;
+    }
 }

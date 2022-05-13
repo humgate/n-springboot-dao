@@ -53,7 +53,10 @@
         </createTable>
 
         <createTable tableName="authorities">
-            <column name="user_id">
+            <column name="id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="integer">
                 <constraints nullable="false" foreignKeyName="fk_user_id" references="users(id)"/>
             </column>
             <column name="authority" type="varchar(64)"/>
