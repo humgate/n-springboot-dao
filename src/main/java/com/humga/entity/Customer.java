@@ -29,18 +29,18 @@ public class Customer {
     private int age;
 
     @Column (name = "phone_number")
-    private long phoneNumber;
+    private Long phoneNumber;
 
     //поле для двусторонней связи с заказами
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private List<Order> orders = new ArrayList<>();
-
-    public void addOrder(Order order) {
-        orders.add(order);
-        order.setCustomer(this);
-    }
-    public void removeComment(Order order) {
-        orders.remove(order);
-        order.setCustomer(null);
-    }
+//    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+//    private List<Order> orders = new ArrayList<>();
+//
+//    public void addOrder(Order order) {
+//        orders.add(order);
+//        order.setCustomer(this);
+//    }
+//    public void removeOrder(Order order) {
+//        orders.remove(order);
+//        order.setCustomer(null);
+//    }
 }
