@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "customers")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -28,19 +28,7 @@ public class Customer {
     @Column(name = "age", nullable = false)
     private int age;
 
-    @Column (name = "phone_number")
+    @Column(name = "phone_number")
     private Long phoneNumber;
-
-    //поле для двусторонней связи с заказами
-//    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-//    private List<Order> orders = new ArrayList<>();
-//
-//    public void addOrder(Order order) {
-//        orders.add(order);
-//        order.setCustomer(this);
-//    }
-//    public void removeOrder(Order order) {
-//        orders.remove(order);
-//        order.setCustomer(null);
-//    }
 }
+
