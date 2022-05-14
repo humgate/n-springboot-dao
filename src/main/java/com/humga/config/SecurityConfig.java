@@ -19,7 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    //в конфигурации Spring security укажем, чтобы наше api не требовало аутентификации
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().and()

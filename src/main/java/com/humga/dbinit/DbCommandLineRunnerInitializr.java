@@ -9,11 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Инициализирует базу пользователей если таблица пользователей пуста
+ * Инициализирует пользователей в базе если таблица пользователей пуста
  *
  */
 @Component
@@ -33,12 +31,9 @@ public class DbCommandLineRunnerInitializr implements CommandLineRunner {
     @Transactional
     public void run(String... args) {
         if (userRepo.findAll().isEmpty()) {
-            User user;
-            Authority authority;
-
-            user= new User("alex", encoder.encode("passAlex"),true);
+            User user= new User("alex", encoder.encode("passAlex"),true);
             userRepo.save(user);
-            authority = new Authority(user, "/customers");
+            Authority authority = new Authority(user, "/customers");
             authRepo.save(authority);
 
             user= new User("fedor", encoder.encode("passFedor"),true);

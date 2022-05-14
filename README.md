@@ -1,10 +1,8 @@
-## RESTful application example implementing querying postgreSQL database
-Exposes one GET endpoint at /products/fetch-product with query parameter `name`.<br>
+## RESTful application example implementing querying postgreSQL database and featuring authorization
+Exposes two GET endpoints:<br>
+- at /products/fetch-product with query parameter `name`. Unauthorized access allowed<br>
 To test go to http://localhost:8080/products/fetch-product?name=alexey.
-
-The database initialization done via:
-- liquibase migration using yaml and xml datachangelog scripts (master branch)
-- liquibase migration using yaml and sql datachangelog scripts (feature/liquibase-migration-sql branch)
-- springboot JDBC initialization (feature/springbood-db-init)<br><br>
-
-- Special version querying db using hibernate entities and hql select syntax (feature/hibernate branch)
+- at /customers. Requires authorization. To test http://localhost:8080/products. 
+Two test users added to db with names: alexey (password = passAlex) and fedor (password = passFedor).<br>
+alexey has access to /customers endpoint by fedor does not.
+Spring security configured with custom UserDetailsService getting authorization info from db using hibernate.
